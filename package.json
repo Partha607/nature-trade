@@ -1,0 +1,25 @@
+{
+  "name": "nature-trade-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Nature Trade — Premium cultural-commerce storefront for Northeast India. A demo by N8E Labs under NEDF.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "framer-motion": "^11.3.0",
+    "lucide-react": "^0.417.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "tailwindcss": "^4.0.0",
+    "vite": "^5.4.0"
+  }
+}

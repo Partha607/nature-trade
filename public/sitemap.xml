@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This demo uses HashRouter, so routes live behind a # fragment which
+     search engines treat as the same document. Until SSR/prerender is
+     added (see FINISHING_PLAN.md Phase 6), the indexable URL is the root. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://naturetradestore.in/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
