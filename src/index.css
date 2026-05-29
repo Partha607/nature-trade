@@ -314,26 +314,14 @@
   100% { opacity: 0; transform: scale(1.5); } /* whole logo looms toward viewer */
 }
 
-/* solid ivory backdrop — covers the page while closed, fades as doors open */
-.door-intro__bg {
-  position: absolute;
-  inset: 0;
-  background: var(--color-ivory);
-  animation: doorBgFade 2s var(--ease-luxe) forwards;
-}
-@keyframes doorBgFade {
-  0%, 32%  { opacity: 1; }
-  66%, 100% { opacity: 0; }
-}
-
-/* each door is ivory and carries one half of the big centred colour logo */
+/* each transparent door carries one half of the big centred colour logo
+   (no solid backdrop — the live page shows through) */
 .door-intro__panel {
   --lw: 460px;
   position: absolute;
   top: 0;
   height: 100%;
   width: 50%;
-  background-color: var(--color-ivory);
   background-image: var(--logo);
   background-repeat: no-repeat;
   background-size: var(--lw) auto;
