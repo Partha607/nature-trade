@@ -29,7 +29,7 @@ export const FOOTER = {
   ],
   contact: {
     address: 'NEDF — Nature Trade, Sivasagar, Assam 785640, India',
-    email: 'info@nedf.co.in',
+    email: 'info@nedf.in',
     phone: '+91 97060 71272',
   },
   socials: [

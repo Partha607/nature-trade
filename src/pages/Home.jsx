@@ -17,7 +17,7 @@ const ORG_JSONLD = {
   alternateName: 'Nature Trade — NEDF',
   description: 'Handwoven textiles, handicrafts and heritage from the eight states of Northeast India, under the North East Development Forum (NEDF).',
   slogan: 'Crafted by Tradition. Rooted in Nature.',
-  email: 'info@nedf.co.in',
+  email: 'info@nedf.in',
   telephone: '+91 97060 71272',
   address: { '@type': 'PostalAddress', addressLocality: 'Sivasagar', addressRegion: 'Assam', postalCode: '785640', addressCountry: 'IN' },
 }
