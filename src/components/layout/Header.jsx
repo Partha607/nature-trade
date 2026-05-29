@@ -34,11 +34,13 @@ export default function Header() {
 
   useEffect(() => setMenuOpen(false), [pathname])
 
-  const onDark = mode === 'overlay' || mode === 'dark'
+  // Overlay heroes: light/ivory text over the hero at the top, flipping to a
+  // solid ivory bar (dark logo + text) once scrolled — matching /about.
+  const onDark = mode === 'dark' || (mode === 'overlay' && !scrolled)
   const showAnnounce = !(mode === 'overlay' && scrolled)
 
   let navBg = ''
-  if (mode === 'overlay') navBg = scrolled ? 'bg-forest/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+  if (mode === 'overlay') navBg = scrolled ? 'bg-ivory/95 backdrop-blur-md border-b border-line shadow-sm' : 'bg-transparent'
   else if (mode === 'dark') navBg = 'bg-forest shadow-md'
   else navBg = 'bg-ivory/95 backdrop-blur-md border-b border-line shadow-sm'
 
