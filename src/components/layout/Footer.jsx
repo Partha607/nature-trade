@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Instagram, Facebook, Youtube, MapPin, Mail, Phone, Send } from 'lucide-react'
 import { FOOTER } from '../../data/navItems.js'
 import Logo from './Logo.jsx'
+import n8eLogo from '../../assets/n8e_labs_logo_light.png'
 
 const socialIcon = { instagram: Instagram, facebook: Facebook, youtube: Youtube, pinterest: Send }
 
@@ -69,13 +70,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-7 border-t border-ivory/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12px] text-ivory/45">
-          <p>© {new Date().getFullYear()} Nature Trade · A cultural-commerce initiative under the North East Development Forum (NEDF).</p>
-          <p className="flex items-center gap-2">
-            <span>Made with care in Sivasagar, Assam</span>
-            <span className="text-gold">·</span>
-            <span>naturetradestore.in</span>
-          </p>
+        <div className="mt-14 pt-7 border-t border-ivory/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-ivory/45">
+          <p>© {new Date().getFullYear()} Nature Trade · Under the North East Development Forum (NEDF).</p>
+          <span className="hidden lg:block">Made with care in Sivasagar, Assam · naturetradestore.in</span>
+          <a href="https://n88ebuild.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 group shrink-0">
+            <span className="text-[10px] uppercase tracking-[0.18em] text-ivory/40 group-hover:text-ivory/70 transition-colors">Designed &amp; built by</span>
+            <img src={n8eLogo} alt="N8E Labs" className="h-9 w-auto" />
+          </a>
         </div>
       </div>
     </footer>
