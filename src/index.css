@@ -294,6 +294,7 @@
 
 /* ============================================================
    Cinematic logo "door" intro (plays on each route entry)
+   Translucent over the page so the logo's light-sweep is visible.
    ============================================================ */
 .door-intro {
   position: fixed;
@@ -305,32 +306,33 @@
   animation: doorIntroSettle 1.8s var(--ease-luxe) forwards;
 }
 @keyframes doorIntroSettle {
-  0%   { opacity: 0; transform: scale(1.06); }
-  12%  { opacity: 1; transform: scale(1); }
-  86%  { opacity: 1; }
+  0%   { opacity: 0; }
+  9%   { opacity: 1; }
+  88%  { opacity: 1; }
   100% { opacity: 0; }
 }
 
-/* solid backdrop so no page peeks through the centre seam while closed */
-.door-intro__bg {
+/* translucent, blurred wash of the page behind (NOT solid) */
+.door-intro__scrim {
   position: absolute;
   inset: 0;
-  background: var(--color-ivory);
+  background: rgba(14, 21, 17, 0.72);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
   animation: doorBgFade 1.8s var(--ease-luxe) forwards;
 }
 @keyframes doorBgFade {
-  0%, 36%  { opacity: 1; }
-  74%, 100% { opacity: 0; }
+  0%, 34%  { opacity: 1; }
+  72%, 100% { opacity: 0; }
 }
 
-/* each door carries one half of the centred logo */
+/* each door is transparent and carries one half of the centred logo */
 .door-intro__panel {
-  --lw: 260px;
+  --lw: 300px;
   position: absolute;
   top: 0;
   height: 100%;
   width: 50%;
-  background-color: var(--color-ivory);
   background-image: var(--logo);
   background-repeat: no-repeat;
   background-size: var(--lw) auto;
@@ -338,21 +340,32 @@
   will-change: transform;
   backface-visibility: hidden;
 }
-@media (max-width: 640px) { .door-intro__panel { --lw: 168px; } }
+@media (max-width: 640px) { .door-intro__panel { --lw: 190px; } }
 
-/* gold light sweep — "lights up" top → bottom, repeating, while loading */
+/* light sweep masked to the logo — the LOGO itself lights up top→bottom, repeating */
 .door-intro__panel::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 30%, rgba(212, 189, 134, 0.65) 50%, transparent 70%);
-  transform: translateY(-130%);
-  mix-blend-mode: overlay;
-  animation: doorShimmer 0.85s ease-in-out 3;
+  top: 50%;
+  width: var(--lw);
+  height: calc(var(--lw) * 0.7074);
+  transform: translateY(-50%);
+  background: linear-gradient(to bottom, transparent 30%, rgba(255, 244, 214, 0.95) 50%, transparent 70%);
+  background-repeat: no-repeat;
+  background-size: 100% 45%;
+  background-position: 0 -60%;
+  -webkit-mask-image: var(--logo);
+  mask-image: var(--logo);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  mix-blend-mode: screen;
+  animation: doorShimmer 0.95s ease-in-out infinite;
 }
 @keyframes doorShimmer {
-  from { transform: translateY(-130%); }
-  to   { transform: translateY(130%); }
+  0%   { background-position: 0 -60%; }
+  100% { background-position: 0 165%; }
 }
 
 .door-intro__panel--left {
@@ -361,18 +374,20 @@
   background-position: calc(50vw - var(--lw) / 2) center;
   animation: doorSwingLeft 1.8s var(--ease-luxe) forwards;
 }
+.door-intro__panel--left::before { left: calc(50vw - var(--lw) / 2); }
 .door-intro__panel--right {
   left: 50%;
   transform-origin: right center;
   background-position: calc(var(--lw) / -2) center;
   animation: doorSwingRight 1.8s var(--ease-luxe) forwards;
 }
+.door-intro__panel--right::before { left: calc(var(--lw) / -2); }
 @keyframes doorSwingLeft {
-  0%, 36% { transform: rotateY(0deg); }
+  0%, 34% { transform: rotateY(0deg); }
   100%    { transform: rotateY(-115deg); }
 }
 @keyframes doorSwingRight {
-  0%, 36% { transform: rotateY(0deg); }
+  0%, 34% { transform: rotateY(0deg); }
   100%    { transform: rotateY(115deg); }
 }
 
