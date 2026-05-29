@@ -23,12 +23,12 @@ export default function Login() {
 
   const submit = (e) => {
     e.preventDefault()
-    const name = form.email ? form.email.split('@')[0].replace(/\./g, ' ') : 'Aarav Sharma'
-    login({ name, email: form.email || 'aarav@naturetradestore.in' })
+    const name = form.email ? form.email.split('@')[0].replace(/\./g, ' ') : 'Julius Longjam'
+    login({ name, email: form.email || 'Julius@n8elabs.com' })
     navigate('/members')
   }
 
-  const demo = () => { login({ name: 'Aarav Sharma', email: 'aarav@naturetradestore.in' }); navigate('/members') }
+  const demo = () => { login({ name: 'Julius Longjam', email: 'Julius@n8elabs.com' }); navigate('/members') }
 
   return (
     <AuthShell eyebrow="Welcome Back" title="Sign in to your account" image={photo('1646750421466-a04e689254d4', 1400)}>

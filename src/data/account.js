@@ -19,8 +19,8 @@ export const ORDERS = [
 ]
 
 export const ADDRESSES = [
-  { label: 'Home', name: 'Aarav Sharma', line: 'House 14, Na-Ali, Sivasagar, Assam 785640', phone: '+91 98640 00000', default: true },
-  { label: 'Work', name: 'Aarav Sharma', line: 'NEDF Office, GS Road, Guwahati, Assam 781005', phone: '+91 98640 11111', default: false },
+  { label: 'Home', name: 'Julius Longjam', line: 'West Boragaon, Guwahati, Assam 781033', phone: '+91 98640 00000', default: true },
+  { label: 'Work', name: 'Julius Longjam', line: 'Megha Plaza, Guwahati, Assam 781029', phone: '+91 98640 11111', default: false },
 ]
 
 export const CARDS = [

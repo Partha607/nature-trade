@@ -64,7 +64,7 @@ const KPIS = [
   { label: 'Visitors (30d)', value: '48,920', delta: '-2.3%', up: false, icon: Eye, spark: [52, 50, 51, 49, 48, 49, 48] },
 ]
 const ADMIN_ORDERS = [
-  { id: 'NT-2041', customer: 'Aarav Sharma', items: 2, total: '₹31,800', status: 'Delivered' },
+  { id: 'NT-2041', customer: 'Julius Longjam', items: 2, total: '₹31,800', status: 'Delivered' },
   { id: 'NT-2042', customer: 'Priya Das', items: 1, total: '₹19,200', status: 'Processing' },
   { id: 'NT-2043', customer: 'Lena Müller', items: 3, total: '₹12,400', status: 'In Transit' },
   { id: 'NT-2044', customer: 'James Carter', items: 1, total: '₹6,800', status: 'Pending' },
@@ -325,7 +325,7 @@ function Products() {
 /* ---------- CRM ---------- */
 function CRM() {
   const customers = [
-    ['Aarav Sharma', 'aarav@…', 12, '₹1,84,200', 'Gold'],
+    ['Julius Longjam', 'Julius@…', 12, '₹1,84,200', 'Gold'],
     ['Priya Das', 'priya@…', 7, '₹96,400', 'Silver'],
     ['Lena Müller', 'lena@…', 4, '₹52,800', 'Silver'],
     ['James Carter', 'james@…', 2, '₹18,600', 'Bronze'],
