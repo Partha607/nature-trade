@@ -7,7 +7,7 @@ import logo from '../../assets/nature_trade_logo.webp'
    toward the viewer as they swing open, revealing the page.
    Skipped for users who prefer reduced motion. */
 
-const DURATION = 450
+const DURATION = 750
 
 export default function DoorIntro() {
   const { pathname } = useLocation()

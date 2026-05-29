@@ -304,7 +304,7 @@
   pointer-events: none;
   overflow: hidden;
   perspective: 1300px;
-  animation: doorIntroSettle 0.45s var(--ease-luxe) forwards;
+  animation: doorIntroSettle 0.75s var(--ease-luxe) forwards;
 }
 @keyframes doorIntroSettle {
   0%   { opacity: 0; transform: scale(1.06); }
@@ -324,7 +324,7 @@
   height: min(560px, 84vw);
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, rgba(247, 242, 234, 0.5) 0%, rgba(247, 242, 234, 0.22) 40%, rgba(247, 242, 234, 0) 70%);
-  animation: doorHaloFade 0.45s var(--ease-luxe) forwards;
+  animation: doorHaloFade 0.75s var(--ease-luxe) forwards;
 }
 @keyframes doorHaloFade {
   0%, 26%  { opacity: 1; }
@@ -352,13 +352,13 @@
   left: 0;
   transform-origin: center center;
   background-position: calc(50vw - var(--lw) / 2) center;
-  animation: doorFlyLeft 0.45s cubic-bezier(0.4, 0, 0.7, 0.4) forwards;
+  animation: doorFlyLeft 0.75s cubic-bezier(0.4, 0, 0.7, 0.4) forwards;
 }
 .door-intro__panel--right {
   left: 50%;
   transform-origin: center center;
   background-position: calc(var(--lw) / -2) center;
-  animation: doorFlyRight 0.45s cubic-bezier(0.4, 0, 0.7, 0.4) forwards;
+  animation: doorFlyRight 0.75s cubic-bezier(0.4, 0, 0.7, 0.4) forwards;
 }
 /* halves split apart + push toward the camera (translateZ) + a door tilt, then dissolve */
 @keyframes doorFlyLeft {
