@@ -1,28 +1,34 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import {
-  ChevronRight, Play, ArrowRight, Leaf, Scissors, Package, Coffee, Gem, Home, BookOpen, Landmark, ShoppingBag, Users,
-} from 'lucide-react'
-import Carousel from '../components/ui/Carousel.jsx'
+import { ChevronRight, Play, ArrowRight, Leaf, Scissors, Package, Gem, Home, Users, Mountain, Award } from 'lucide-react'
 import VideoModal from '../components/ui/VideoModal.jsx'
-import { Button, Reveal } from '../components/common.jsx'
+import { Button } from '../components/common.jsx'
 import Seo from '../components/Seo.jsx'
 import { STATES, STATE_MAP } from '../data/states.js'
+import { DISCOVER } from '../data/discover.js'
 
-const TREASURE_ICONS = [Leaf, Scissors, Package, Coffee, Gem, Home]
-const RIGHT_CARDS = [
-  { icon: BookOpen, label: 'Explore Stories', to: '/journal' },
-  { icon: Landmark, label: 'Explore Heritage', to: '/about' },
-  { icon: ShoppingBag, label: 'Explore Products', toState: true },
-  { icon: Users, label: 'Meet Artisans', to: '/artisans' },
-]
+const STAT_ICONS = [Leaf, Scissors, Users, Mountain, Award]
+const TRE_ICONS = [Leaf, Scissors, Package, Gem, Home, Award]
+const Arrow = (props) => (
+  <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1.4" width="22" height="11" {...props}><path d="M1 6h21M17 1l5 5-5 5" /></svg>
+)
+
+// route each card/treasure CTA to a sensible destination
+function ctaTo(text, slug) {
+  const t = text.toLowerCase()
+  if (/artisan/.test(t)) return '/artisans'
+  if (/stor(y|ies)/.test(t)) return '/journal'
+  if (/heritage/.test(t)) return '/about'
+  return `/shop?state=${slug}`
+}
 
 export default function StatePage() {
   const { slug } = useParams()
   const s = STATE_MAP[slug]
+  const dd = DISCOVER[slug]
   const [video, setVideo] = useState(false)
 
-  if (!s) {
+  if (!s || !dd) {
     return (
       <div className="container-luxe py-32 text-center">
         <h1 className="font-serif text-4xl text-forest">State not found</h1>
@@ -31,138 +37,122 @@ export default function StatePage() {
     )
   }
 
+  const t = dd.theme
+  const themeVars = {
+    '--st-ink': t.ink, '--st-ink-rgb': t.inkRgb, '--st-accent': t.accent, '--st-accent2': t.accent2,
+    '--st-hero-text': t.heroText, '--st-hero-dim': t.heroDim, '--st-about-bg': t.aboutBg, '--st-about-ink': t.aboutInk,
+    '--st-about-dim': t.aboutDim, '--st-about-line': t.aboutLine, '--st-treasure-bg': t.treasureBg,
+    '--st-treasure-tx': t.treasureTx, '--st-card-bg': t.cardBg, '--st-card-ink': t.cardInk,
+  }
+  const numbered = dd.stats.filter((x) => !x.note)
+
   return (
-    <div className="container-luxe py-6">
-      <Seo title={s.title || s.name} description={s.blurb} image={s.hero[0]} />
+    <div className="state-page" style={themeVars}>
+      <Seo title={s.title || s.name} description={dd.sub} image={dd.hero} />
+
       {/* breadcrumb */}
-      <nav className="flex items-center gap-1.5 text-[12px] text-stone mb-5">
-        <Link to="/" className="hover:text-forest">Home</Link><ChevronRight size={13} />
-        <Link to="/northeast" className="hover:text-forest">Discover Northeast</Link><ChevronRight size={13} />
-        <span className="text-forest">{s.name}</span>
+      <nav className="sp-crumb">
+        <Link to="/">Home</Link><span className="sep">›</span>
+        <Link to="/northeast">Discover Northeast</Link><span className="sep">›</span>
+        <span className="cur">{s.name}</span>
       </nav>
 
-      <div className="grid lg:grid-cols-[210px_1fr] gap-8">
-        {/* sidebar */}
-        <aside className="hidden lg:block">
-          <div className="sticky top-28">
-            <p className="eyebrow text-gold-700 mb-4">The Eight States</p>
-            <ul className="space-y-1">
-              {STATES.map((st) => {
-                const on = st.slug === slug
-                return (
-                  <li key={st.slug}>
-                    <Link to={`/northeast/${st.slug}`} className={`flex items-center gap-2.5 py-2 text-[15px] transition-colors ${on ? 'text-forest font-medium' : 'text-stone hover:text-forest'}`}>
-                      <span className={`h-1.5 w-1.5 rounded-full ${on ? '' : 'opacity-30'}`} style={{ background: on ? s.accent.from : '#8a8275' }} />
-                      {st.name}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+      {/* HERO */}
+      <section className="sp-hero">
+        <div className="sp-hero-photo" style={{
+          backgroundImage: `linear-gradient(90deg, rgb(${t.inkRgb}) 0%, rgb(${t.inkRgb}) 26%, rgba(${t.inkRgb},0.72) 46%, rgba(${t.inkRgb},0.12) 66%, rgba(${t.inkRgb},0) 80%), url(${dd.hero})`,
+          backgroundSize: 'cover, cover',
+          backgroundPosition: 'center, right center',
+        }} />
+        <aside className="sp-rail">
+          <div className="sp-rail-title">The Eight States</div>
+          <ul>
+            {STATES.map((st) => (
+              <li key={st.slug}>
+                <Link to={`/northeast/${st.slug}`} className={st.slug === slug ? 'on' : ''}>{st.name}</Link>
+              </li>
+            ))}
+          </ul>
         </aside>
-
-        {/* content */}
-        <div>
-          {/* HERO */}
-          <div className="relative rounded-xl overflow-hidden">
-            <Carousel images={s.hero} heightClass="h-[440px] md:h-[520px]" overlay="left" arrows={s.hero.length > 1} dots={false} autoplay>
-              <div className="h-full flex flex-col justify-center px-8 md:px-12 max-w-xl">
-                <Reveal>
-                  <p className="eyebrow text-gold-300 mb-2">The Land of</p>
-                  <h1 className="display-1 text-ivory uppercase leading-none">{s.name}</h1>
-                  <p className="mt-4 text-ivory/85 max-w-md">{s.blurb}</p>
-                  <button onClick={() => setVideo(true)} className="mt-6 inline-flex items-center gap-3 text-ivory group">
-                    <span className="h-12 w-12 rounded-full border border-ivory/60 flex items-center justify-center group-hover:bg-gold group-hover:border-gold transition-colors"><Play size={16} className="fill-current ml-0.5" /></span>
-                    <span className="text-[12px] font-semibold tracking-[0.2em] uppercase">Watch the Story</span>
-                  </button>
-                </Reveal>
-              </div>
-            </Carousel>
-          </div>
-
-          {/* STATS STRIP */}
-          <div className="grid grid-cols-2 md:grid-cols-4 rounded-b-xl -mt-1" style={{ background: `linear-gradient(100deg, ${s.accent.ink}, ${s.accent.from}40)` }}>
-            {s.stats.map((st, i) => {
-              const Icon = TREASURE_ICONS[i % TREASURE_ICONS.length]
-              return (
-                <div key={st.label} className={`px-5 py-6 flex items-center gap-3 ${i < s.stats.length - 1 ? 'md:border-r border-ivory/10' : ''}`}>
-                  <Icon size={26} strokeWidth={1.3} className="text-gold-300 shrink-0" />
-                  <div>
-                    <div className="font-serif text-2xl text-ivory leading-none">{st.value}</div>
-                    <div className="text-[11px] uppercase tracking-wide text-ivory/70 mt-1">{st.label}</div>
-                    <div className="text-[10px] text-ivory/45">{st.note}</div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* ABOUT */}
-          <div className="grid md:grid-cols-[0.85fr_1.15fr] gap-10 mt-16 items-start">
-            <Reveal>
-              <p className="eyebrow text-gold-700 mb-3">About {s.name}</p>
-              <h2 className="display-3 text-forest">{s.aboutTitle}</h2>
-              <p className="mt-5 text-[15px] leading-relaxed text-charcoal/80">{s.about}</p>
-              <Button to={`/shop?state=${s.slug}`} variant="outline-dark" icon={ArrowRight} className="mt-7">Explore {s.name}</Button>
-              <svg viewBox="0 0 120 120" className="w-24 h-24 mt-8 opacity-60" style={{ color: s.accent.from }} fill="none" stroke="currentColor" strokeWidth="1.4">
-                <path d="M60 110 C60 60 70 30 100 14 C84 44 74 70 60 110" />
-                <path d="M60 110 C60 60 50 30 20 14 C36 44 46 70 60 110" />
-                <path d="M60 110 V40" />
-              </svg>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="grid sm:grid-cols-3 gap-4">
-                {s.cards.map((c) => (
-                  <div key={c.title} className="bg-white rounded-lg overflow-hidden ring-1 ring-line card-rise">
-                    <div className="img-zoom ratio-wide overflow-hidden">
-                      <img src={c.img} alt={c.title} loading="lazy" className="h-full w-full object-cover" />
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-serif text-lg text-forest">{c.title}</h3>
-                      <p className="text-[12.5px] text-stone mt-1.5 clamp-3">{c.text}</p>
-                      <span className="mt-3 inline-flex items-center gap-1.5 text-[10.5px] font-semibold tracking-[0.16em] uppercase text-gold-700">{c.cta} <ArrowRight size={12} /></span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* right quick-links */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
-                {RIGHT_CARDS.map((rc) => (
-                  <Link key={rc.label} to={rc.toState ? `/shop?state=${s.slug}` : rc.to} className="flex flex-col items-center gap-2 py-4 rounded-lg ring-1 ring-line hover:ring-gold hover:bg-ivory-100 transition-all text-center">
-                    <rc.icon size={20} className="text-gold-700" />
-                    <span className="text-[11px] font-medium text-forest">{rc.label}</span>
-                  </Link>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-
-          {/* TREASURES STRIP */}
-          <div className="mt-16 rounded-xl grain overflow-hidden" style={{ background: s.accent.ink }}>
-            <div className="px-6 py-10 md:px-10">
-              <p className="text-center text-ivory font-serif text-2xl md:text-3xl mb-8">Explore {s.name}'s Treasures</p>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-y-7 gap-x-4">
-                {s.treasures.map((t, i) => {
-                  const Icon = TREASURE_ICONS[i % TREASURE_ICONS.length]
-                  return (
-                    <Link key={t} to={`/shop?state=${s.slug}`} className="flex flex-col items-center text-center gap-3 group">
-                      <span className="h-14 w-14 rounded-full border border-gold-300/40 flex items-center justify-center text-gold-300 group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-colors">
-                        <Icon size={22} strokeWidth={1.4} />
-                      </span>
-                      <span className="text-[12px] text-ivory/80 leading-snug">{t}</span>
-                    </Link>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
+        <div className="sp-hero-copy">
+          <div className="sp-eyebrow">The Land of</div>
+          <h1 className="sp-title">{s.name}</h1>
+          <div className="sp-rule" />
+          <p className="sp-sub">{dd.sub}</p>
+          <button onClick={() => setVideo(true)} className="sp-watch">
+            <span className="sp-play"><Play size={16} className="fill-current ml-0.5" /></span>
+            Watch the Story
+          </button>
         </div>
-      </div>
+      </section>
 
-      <VideoModal open={video} onClose={() => setVideo(false)} poster={s.hero[0]} title={`The Story of ${s.name}`} subtitle={s.tagline} />
+      {/* STATS */}
+      <section className="sp-stats">
+        {dd.stats.map((st, i) => {
+          if (st.note) {
+            const Icon = Gem
+            return (
+              <div key={i} className="sp-stat note">
+                <Icon className="si" size={34} strokeWidth={1.3} />
+                <div><div className="sv">{st.v}</div></div>
+              </div>
+            )
+          }
+          const Icon = STAT_ICONS[i % STAT_ICONS.length]
+          return (
+            <div key={i} className="sp-stat">
+              <Icon className="si" size={34} strokeWidth={1.3} />
+              <div><div className="sv">{st.v}</div><div className="sl">{st.l}</div></div>
+            </div>
+          )
+        })}
+      </section>
+
+      {/* ABOUT + CARDS */}
+      <section className="sp-about">
+        <svg className="sp-botanical" viewBox="0 0 200 360" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M100 350C40 280 30 150 90 40c50 90 60 220 10 310" />
+          <path d="M95 320c-30-20-50-60-55-110M100 250c25-25 35-70 30-120M97 180c-22-12-38-40-42-78M101 150c20-16 30-50 28-90" />
+        </svg>
+        <div className="sp-about-intro">
+          <div className="sp-about-eyebrow">About {s.name}</div>
+          <h2 className="sp-about-head">{dd.aboutHead[0]}<br />{dd.aboutHead[1]}</h2>
+          <div className="sp-about-line" />
+          <p className="sp-about-text">{dd.aboutText}</p>
+          <Link className="sp-btn" to={`/shop?state=${slug}`}>Explore {s.name} <Arrow /></Link>
+        </div>
+        <div className={`sp-cards ${dd.cards.length === 3 ? 'cards-3' : ''}`}>
+          {dd.cards.map((c) => (
+            <Link key={c.title} to={ctaTo(c.cta, slug)} className="sp-card card-rise">
+              <div className="pic" style={{ backgroundImage: `url(${c.img})` }} />
+              <div className="sp-card-body">
+                <h4>{c.title}</h4>
+                <p>{c.text}</p>
+                <span className="sp-clink">{c.cta} <Arrow /></span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* TREASURES */}
+      <section className="sp-treasures">
+        <div className="sp-tre-title"><span className="deco">&#10070;</span> Explore {s.name}&rsquo;s Treasures <span className="deco">&#10070;</span></div>
+        <div className="sp-tre-row">
+          {dd.treasures.map((tr, i) => {
+            const Icon = TRE_ICONS[i % TRE_ICONS.length]
+            return (
+              <Link key={tr} to={`/shop?state=${slug}`} className="sp-treasure">
+                <Icon className="ti" size={34} strokeWidth={1.3} />
+                <span className="tx">{tr}</span>
+              </Link>
+            )
+          })}
+          <Link to={`/shop?state=${slug}`} className="sp-tre-arrow" aria-label={`Shop ${s.name}`}><Arrow /></Link>
+        </div>
+      </section>
+
+      <VideoModal open={video} onClose={() => setVideo(false)} poster={dd.hero} title={`The Story of ${s.name}`} subtitle={s.tagline} />
     </div>
   )
 }
