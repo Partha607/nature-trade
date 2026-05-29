@@ -3,6 +3,7 @@ import { Instagram, Facebook, Youtube, MapPin, Mail, Phone, Send } from 'lucide-
 import { FOOTER } from '../../data/navItems.js'
 import Logo from './Logo.jsx'
 import n8eLogo from '../../assets/n8e_labs_logo_light.png'
+import natureWatermark from '../../assets/nature_trade_logo_light.webp'
 
 const socialIcon = { instagram: Instagram, facebook: Facebook, youtube: Youtube, pinterest: Send }
 
@@ -10,12 +11,12 @@ export default function Footer() {
   return (
     <footer className="relative bg-forest-900 text-ivory/80 grain overflow-hidden">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
-      {/* N8E Labs watermark — faded washed background for depth */}
+      {/* Nature Trade emblem — faded, washed watermark for depth */}
       <img
-        src={n8eLogo}
+        src={natureWatermark}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] max-w-[150%] opacity-[0.045] z-0"
+        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] max-w-[150%] opacity-[0.05] z-0"
       />
       <div className="container-luxe py-16 md:py-20 relative z-[3]">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr]">
