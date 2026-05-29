@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-// inverted (light) logo so it reads + shimmers on the translucent dark scrim
-import logo from '../../assets/nature_trade_logo_light.webp'
+// colour logo for the intro
+import logo from '../../assets/nature_trade_logo.webp'
 
 /* Cinematic welcome: on each route entry an ivory overlay shows the Nature
    Trade emblem with a top→bottom gold light-sweep ("loading"), then splits
@@ -33,6 +33,7 @@ export default function DoorIntro() {
   return (
     <div key={runId} className="door-intro" style={{ '--logo': `url(${logo})` }} aria-hidden="true">
       <div className="door-intro__scrim" />
+      <div className="door-intro__glow" />
       <div className="door-intro__panel door-intro__panel--left" />
       <div className="door-intro__panel door-intro__panel--right" />
     </div>

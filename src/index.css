@@ -326,6 +326,19 @@
   72%, 100% { opacity: 0; }
 }
 
+/* soft ivory halo behind the logo so the colour emblem reads on the dark wash
+   (page stays translucent around it) */
+.door-intro__glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(640px, 90vw);
+  height: min(440px, 64vw);
+  background: radial-gradient(ellipse at center, rgba(247, 242, 234, 0.96) 0%, rgba(247, 242, 234, 0.85) 40%, rgba(247, 242, 234, 0) 72%);
+  animation: doorBgFade 1.8s var(--ease-luxe) forwards;
+}
+
 /* each door is transparent and carries one half of the centred logo */
 .door-intro__panel {
   --lw: 300px;
@@ -350,9 +363,9 @@
   width: var(--lw);
   height: calc(var(--lw) * 0.7074);
   transform: translateY(-50%);
-  background: linear-gradient(to bottom, transparent 30%, rgba(255, 244, 214, 0.95) 50%, transparent 70%);
+  background: linear-gradient(to bottom, transparent 32%, rgba(255, 253, 246, 0.92) 50%, transparent 68%);
   background-repeat: no-repeat;
-  background-size: 100% 45%;
+  background-size: 100% 42%;
   background-position: 0 -60%;
   -webkit-mask-image: var(--logo);
   mask-image: var(--logo);
@@ -360,7 +373,6 @@
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
-  mix-blend-mode: screen;
   animation: doorShimmer 0.95s ease-in-out infinite;
 }
 @keyframes doorShimmer {
