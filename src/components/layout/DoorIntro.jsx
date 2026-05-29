@@ -33,27 +33,25 @@ export default function DoorIntro() {
   return (
     <div key={runId} className="door-intro" style={{ '--logo': `url(${logo})` }} aria-hidden="true">
       <div className="door-intro__scrim" />
-      <svg className="door-intro__scene" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <svg className="door-intro__scene" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
-          <radialGradient id="diSky" cx="50%" cy="46%" r="60%">
-            <stop offset="0%" stopColor="#fbf7ef" stopOpacity="0.82" />
-            <stop offset="52%" stopColor="#f1e7d3" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#f1e7d3" stopOpacity="0" />
-          </radialGradient>
           <linearGradient id="diSun" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#f7c66c" />
-            <stop offset="100%" stopColor="#cf6a22" />
+            <stop offset="0%" stopColor="#f3bd5f" />
+            <stop offset="100%" stopColor="#c5531b" />
+          </linearGradient>
+          <linearGradient id="diMtn" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#f8f2e6" />
+            <stop offset="100%" stopColor="#e7d9bf" />
           </linearGradient>
           <linearGradient id="diStream" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#fbf8f1" stopOpacity="0.95" />
-            <stop offset="100%" stopColor="#e7d9bd" stopOpacity="0.12" />
+            <stop offset="0%" stopColor="#c9a85f" stopOpacity="0" />
+            <stop offset="45%" stopColor="#c4a052" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#b68d42" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <rect width="600" height="400" fill="url(#diSky)" />
-        <circle cx="300" cy="72" r="42" fill="url(#diSun)" />
-        <path d="M0 300 L120 214 L210 268 L300 184 L392 256 L482 206 L600 300 L600 400 L0 400 Z" fill="#e7dcc4" fillOpacity="0.5" />
-        <path d="M0 346 L96 280 L188 328 L300 238 L416 328 L520 282 L600 346 L600 400 L0 400 Z" fill="#cdbf9f" fillOpacity="0.72" />
-        <path d="M300 250 C 282 292, 318 308, 300 338 C 285 366, 316 374, 300 400" fill="none" stroke="url(#diStream)" strokeWidth="15" strokeLinecap="round" />
+        <circle cx="300" cy="60" r="36" fill="url(#diSun)" />
+        <path d="M0 350 L80 285 L150 250 L215 195 L300 152 L385 195 L450 250 L520 285 L600 350 L600 420 L0 420 Z" fill="url(#diMtn)" />
+        <path d="M300 165 C 288 235, 314 272, 300 322 C 289 356, 312 374, 300 420" fill="none" stroke="url(#diStream)" strokeWidth="13" strokeLinecap="round" />
       </svg>
       <div className="door-intro__panel door-intro__panel--left" />
       <div className="door-intro__panel door-intro__panel--right" />

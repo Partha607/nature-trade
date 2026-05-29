@@ -326,13 +326,12 @@
   72%, 100% { opacity: 0; }
 }
 
-/* themed silhouette scene (sun + mountains + stream) behind the logo,
-   echoing the Nature Trade emblem; replaces the plain halo */
+/* clean mountain + stream + sun silhouette behind the logo (echoes the emblem) */
 .door-intro__scene {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(780px, 96vw);
+  width: min(660px, 92vw);
   height: auto;
   transform: translate(-50%, -50%);
   pointer-events: none;
