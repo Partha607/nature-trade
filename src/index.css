@@ -326,16 +326,16 @@
   72%, 100% { opacity: 0; }
 }
 
-/* soft ivory halo behind the logo so the colour emblem reads on the dark wash
-   (page stays translucent around it) */
-.door-intro__glow {
+/* themed silhouette scene (sun + mountains + stream) behind the logo,
+   echoing the Nature Trade emblem; replaces the plain halo */
+.door-intro__scene {
   position: absolute;
   left: 50%;
   top: 50%;
+  width: min(780px, 96vw);
+  height: auto;
   transform: translate(-50%, -50%);
-  width: min(640px, 90vw);
-  height: min(440px, 64vw);
-  background: radial-gradient(ellipse at center, rgba(247, 242, 234, 0.96) 0%, rgba(247, 242, 234, 0.85) 40%, rgba(247, 242, 234, 0) 72%);
+  pointer-events: none;
   animation: doorBgFade 1.8s var(--ease-luxe) forwards;
 }
 
