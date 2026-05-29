@@ -8,7 +8,7 @@ import { NE_GEO, NE_VIEWBOX } from '../../data/neGeo.js'
      • light → coloured states on a parchment ground (Discover Northeast)
    API unchanged: selected / onSelect / showLabels. */
 
-export default function InteractiveMap({ selected, onSelect, tone = 'dark', showLabels = true, className = '' }) {
+export default function InteractiveMap({ selected, onSelect, onActivate, tone = 'dark', showLabels = true, className = '' }) {
   const dark = tone === 'dark'
   const labelInk = dark ? '#F7F2EA' : '#27331f'
 
@@ -46,10 +46,14 @@ export default function InteractiveMap({ selected, onSelect, tone = 'dark', show
         return (
           <g
             key={s.slug}
+            role="button"
+            tabIndex={0}
+            aria-label={`Explore ${s.name}`}
             onMouseEnter={() => onSelect?.(s.slug)}
-            onClick={() => onSelect?.(s.slug)}
-            className="cursor-pointer transition-all duration-500"
-            style={{ transformOrigin: `${g.cx}px ${g.cy}px`, transform: active ? 'scale(1.035)' : 'scale(1)' }}
+            onClick={() => (onActivate || onSelect)?.(s.slug)}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); (onActivate || onSelect)?.(s.slug) } }}
+            className="cursor-pointer transition-all duration-500 focus:outline-none"
+            style={{ transformOrigin: `${g.cx}px ${g.cy}px`, transform: active ? 'scale(1.15)' : 'scale(1)' }}
           >
             <path
               d={g.d}

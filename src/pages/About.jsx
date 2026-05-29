@@ -68,8 +68,19 @@ export default function About() {
           <Reveal delay={0.1} className="mt-12">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
               {STATES.map((s) => (
-                <Link key={s.slug} to={`/northeast/${s.slug}`} className="group relative rounded-lg overflow-hidden min-h-[230px] flex flex-col justify-end p-4 card-rise" style={{ background: `linear-gradient(160deg, ${s.accent.from}, ${s.accent.to})` }}>
-                  <div className="absolute inset-0 grain opacity-60" />
+                <Link key={s.slug} to={`/northeast/${s.slug}`} className="group relative rounded-lg overflow-hidden min-h-[230px] flex flex-col justify-end p-4 card-rise">
+                  {/* Accent gradient — the default face */}
+                  <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0" style={{ background: `linear-gradient(160deg, ${s.accent.from}, ${s.accent.to})` }} />
+                  {/* Real state photograph — revealed on hover */}
+                  <img
+                    src={`${import.meta.env.BASE_URL}states/${s.slug}.webp`}
+                    alt={s.name}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover opacity-0 scale-110 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:scale-100"
+                  />
+                  {/* Legibility scrim + grain (over both states) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-forest-900/85 via-forest-900/20 to-transparent" />
+                  <div className="absolute inset-0 grain opacity-50" />
                   <div className="relative z-[2]">
                     <h3 className="font-serif text-xl text-ivory">{s.name}</h3>
                     <p className="text-[11px] text-ivory/80 mt-1 leading-snug">{s.tagline}</p>

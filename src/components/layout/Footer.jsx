@@ -10,13 +10,20 @@ export default function Footer() {
   return (
     <footer className="relative bg-forest-900 text-ivory/80 grain overflow-hidden">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+      {/* N8E Labs watermark — faded washed background for depth */}
+      <img
+        src={n8eLogo}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] max-w-[150%] opacity-[0.045] z-0"
+      />
       <div className="container-luxe py-16 md:py-20 relative z-[3]">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr]">
           {/* About */}
-          <div>
-            <Logo tone="light" />
-            <p className="mt-6 text-[13.5px] leading-relaxed text-ivory/60 max-w-sm">{FOOTER.about}</p>
-            <div className="mt-6 flex gap-3">
+          <div className="flex flex-col items-center text-center md:items-center">
+            <Logo tone="light" size="footer" />
+            <p className="mt-6 text-[13.5px] leading-relaxed text-ivory/60 max-w-sm mx-auto">{FOOTER.about}</p>
+            <div className="mt-6 flex gap-3 justify-center">
               {FOOTER.socials.map((s) => {
                 const Icon = socialIcon[s.icon] || Send
                 return (
@@ -71,7 +78,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-7 border-t border-ivory/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-ivory/45">
-          <p>© {new Date().getFullYear()} Nature Trade · Under the North East Development Forum (NEDF).</p>
+          <p>© {new Date().getFullYear()} Nature Trade · A cultural-commerce initiative of the North East Development Forum (NEDF), est. 2006 · A living archive of Northeast craft.</p>
           <span className="hidden lg:block">Made with care in Sivasagar, Assam · naturetradestore.in</span>
           <a href="https://n88ebuild.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 group shrink-0">
             <span className="text-[10px] uppercase tracking-[0.18em] text-ivory/40 group-hover:text-ivory/70 transition-colors">Designed &amp; built by</span>

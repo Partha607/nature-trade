@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, MapPin } from 'lucide-react'
 import Carousel from '../components/ui/Carousel.jsx'
 import InteractiveMap from '../components/ui/InteractiveMap.jsx'
@@ -25,6 +25,7 @@ const ORG_JSONLD = {
 export default function Home() {
   const [activeState, setActiveState] = useState('nagaland')
   const s = STATE_MAP[activeState]
+  const navigate = useNavigate()
 
   return (
     <>
@@ -63,7 +64,7 @@ export default function Home() {
 
           <div className="mt-12 grid lg:grid-cols-[1.5fr_1fr] gap-10 lg:gap-16 items-center">
             <Reveal className="relative">
-              <InteractiveMap selected={activeState} onSelect={setActiveState} tone="dark" />
+              <InteractiveMap selected={activeState} onSelect={setActiveState} onActivate={(slug) => navigate(`/northeast/${slug}`)} tone="dark" />
             </Reveal>
 
             <Reveal delay={0.1}>

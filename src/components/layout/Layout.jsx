@@ -22,7 +22,7 @@ export default function Layout() {
       <ScrollToTop />
       <Header />
       <SearchOverlay />
-      <main className={`flex-1 ${overlay ? '' : 'pt-[104px]'}`}>
+      <main className={`flex-1 ${overlay ? '' : 'pt-[116px] md:pt-[128px]'}`}>
         <Suspense fallback={<RouteFallback />}>
           <Outlet />
         </Suspense>

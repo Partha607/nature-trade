@@ -1,8 +1,8 @@
 /* Featured collections shown on the home page. */
-import { photo } from './images.js'
+import { photo, NEDF } from './images.js'
 
 export const COLLECTIONS = [
-  { title: 'Warrior Weaves of Nagaland', sub: 'Nagaland', to: '/shop?state=nagaland', img: photo('1569909115134-a0426936c879', 900) },
+  { title: 'Longpi Black Pottery', sub: 'Manipur', to: '/shop?state=manipur', img: NEDF.products.longpi },
   { title: 'Muga Gold of Assam', sub: 'Assam', to: '/shop?state=assam', img: photo('1646750421466-a04e689254d4', 900) },
   { title: 'Bamboo Living', sub: 'Across the Hills', to: '/shop?category=Bamboo%20%26%20Cane', img: photo('1694855475416-64d819d20648', 900) },
   { title: 'Tribal Jewellery', sub: 'Adornment & Honour', to: '/shop?category=Jewellery', img: photo('1580467469359-91a73a6e92ca', 900) },

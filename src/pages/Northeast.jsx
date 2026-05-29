@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight, Play, Compass, MapPin } from 'lucide-react'
 import Carousel from '../components/ui/Carousel.jsx'
 import InteractiveMap from '../components/ui/InteractiveMap.jsx'
@@ -12,6 +12,7 @@ export default function Northeast() {
   const [featured, setFeatured] = useState('nagaland')
   const [video, setVideo] = useState(false)
   const s = STATE_MAP[featured]
+  const navigate = useNavigate()
   const heroImages = STATES.map((st) => st.hero[0])
 
   return (
@@ -59,7 +60,7 @@ export default function Northeast() {
           </Reveal>
           <Reveal delay={0.1}>
             <div className="relative rounded-xl bg-gradient-to-br from-ivory-100 to-ivory-200 ring-1 ring-line p-6">
-              <InteractiveMap selected={featured} onSelect={setFeatured} tone="light" />
+              <InteractiveMap selected={featured} onSelect={setFeatured} onActivate={(slug) => navigate(`/northeast/${slug}`)} tone="light" />
             </div>
           </Reveal>
         </div>

@@ -55,7 +55,7 @@ export default function Header() {
       </AnimatePresence>
 
       <div className={`transition-all duration-500 ${navBg}`}>
-        <div className="container-luxe flex items-center justify-between gap-4 py-3 md:py-3.5">
+        <div className="container-luxe flex items-center justify-between gap-4 py-2 md:py-2.5">
           <Logo tone={onDark ? 'light' : 'dark'} />
 
           {/* Desktop nav */}
