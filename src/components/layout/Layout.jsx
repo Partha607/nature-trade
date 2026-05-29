@@ -4,6 +4,7 @@ import Header from './Header.jsx'
 import Footer from './Footer.jsx'
 import SearchOverlay from './SearchOverlay.jsx'
 import ScrollToTop from './ScrollToTop.jsx'
+import DoorIntro from './DoorIntro.jsx'
 import { getHeaderMode } from '../../lib/headerMode.js'
 
 function RouteFallback() {
@@ -20,6 +21,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col bg-ivory">
       <ScrollToTop />
+      <DoorIntro />
       <Header />
       <SearchOverlay />
       <main className={`flex-1 ${overlay ? '' : 'pt-[116px] md:pt-[128px]'}`}>
