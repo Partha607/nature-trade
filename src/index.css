@@ -294,7 +294,8 @@
 
 /* ============================================================
    Cinematic logo "door" intro (plays on each route entry)
-   Translucent over the page so the logo's light-sweep is visible.
+   Big colour emblem on ivory; the two halves loom toward the viewer
+   as they split and swing open, revealing the page.
    ============================================================ */
 .door-intro {
   position: fixed;
@@ -302,104 +303,66 @@
   z-index: 200;
   pointer-events: none;
   overflow: hidden;
-  perspective: 1700px;
-  animation: doorIntroSettle 1.8s var(--ease-luxe) forwards;
+  perspective: 1300px;
+  animation: doorIntroSettle 2s var(--ease-luxe) forwards;
 }
 @keyframes doorIntroSettle {
-  0%   { opacity: 0; }
-  9%   { opacity: 1; }
-  88%  { opacity: 1; }
-  100% { opacity: 0; }
+  0%   { opacity: 0; transform: scale(1.08); }
+  12%  { opacity: 1; transform: scale(1); }
+  32%  { transform: scale(1); }
+  82%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.5); } /* whole logo looms toward viewer */
 }
 
-/* translucent, blurred wash of the page behind (NOT solid) */
-.door-intro__scrim {
+/* solid ivory backdrop — covers the page while closed, fades as doors open */
+.door-intro__bg {
   position: absolute;
   inset: 0;
-  background: rgba(14, 21, 17, 0.72);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  animation: doorBgFade 1.8s var(--ease-luxe) forwards;
+  background: var(--color-ivory);
+  animation: doorBgFade 2s var(--ease-luxe) forwards;
 }
 @keyframes doorBgFade {
-  0%, 34%  { opacity: 1; }
-  72%, 100% { opacity: 0; }
+  0%, 32%  { opacity: 1; }
+  66%, 100% { opacity: 0; }
 }
 
-/* clean mountain + stream + sun silhouette behind the logo (echoes the emblem) */
-.door-intro__scene {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(660px, 92vw);
-  height: auto;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  animation: doorBgFade 1.8s var(--ease-luxe) forwards;
-}
-
-/* each door is transparent and carries one half of the centred logo */
+/* each door is ivory and carries one half of the big centred colour logo */
 .door-intro__panel {
-  --lw: 300px;
+  --lw: 460px;
   position: absolute;
   top: 0;
   height: 100%;
   width: 50%;
+  background-color: var(--color-ivory);
   background-image: var(--logo);
   background-repeat: no-repeat;
   background-size: var(--lw) auto;
   overflow: hidden;
-  will-change: transform;
+  will-change: transform, opacity;
   backface-visibility: hidden;
 }
-@media (max-width: 640px) { .door-intro__panel { --lw: 190px; } }
-
-/* light sweep masked to the logo — the LOGO itself lights up top→bottom, repeating */
-.door-intro__panel::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: var(--lw);
-  height: calc(var(--lw) * 0.7074);
-  transform: translateY(-50%);
-  background: linear-gradient(to bottom, transparent 32%, rgba(255, 253, 246, 0.92) 50%, transparent 68%);
-  background-repeat: no-repeat;
-  background-size: 100% 42%;
-  background-position: 0 -60%;
-  -webkit-mask-image: var(--logo);
-  mask-image: var(--logo);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  animation: doorShimmer 0.95s ease-in-out infinite;
-}
-@keyframes doorShimmer {
-  0%   { background-position: 0 -60%; }
-  100% { background-position: 0 165%; }
-}
+@media (max-width: 640px) { .door-intro__panel { --lw: 260px; } }
 
 .door-intro__panel--left {
   left: 0;
-  transform-origin: left center;
+  transform-origin: center center;
   background-position: calc(50vw - var(--lw) / 2) center;
-  animation: doorSwingLeft 1.8s var(--ease-luxe) forwards;
+  animation: doorFlyLeft 2s cubic-bezier(0.45, 0, 0.7, 0.35) forwards;
 }
-.door-intro__panel--left::before { left: calc(50vw - var(--lw) / 2); }
 .door-intro__panel--right {
   left: 50%;
-  transform-origin: right center;
+  transform-origin: center center;
   background-position: calc(var(--lw) / -2) center;
-  animation: doorSwingRight 1.8s var(--ease-luxe) forwards;
+  animation: doorFlyRight 2s cubic-bezier(0.45, 0, 0.7, 0.35) forwards;
 }
-.door-intro__panel--right::before { left: calc(var(--lw) / -2); }
-@keyframes doorSwingLeft {
-  0%, 34% { transform: rotateY(0deg); }
-  100%    { transform: rotateY(-115deg); }
+/* halves split apart + push toward the camera (translateZ) + a door tilt, then dissolve */
+@keyframes doorFlyLeft {
+  0%, 30% { transform: translate3d(0, 0, 0) rotateY(0deg); opacity: 1; }
+  100%    { transform: translate3d(-72%, 0, 380px) rotateY(22deg); opacity: 0; }
 }
-@keyframes doorSwingRight {
-  0%, 34% { transform: rotateY(0deg); }
-  100%    { transform: rotateY(115deg); }
+@keyframes doorFlyRight {
+  0%, 30% { transform: translate3d(0, 0, 0) rotateY(0deg); opacity: 1; }
+  100%    { transform: translate3d(72%, 0, 380px) rotateY(-22deg); opacity: 0; }
 }
 
 /* Respect users who prefer reduced motion */
