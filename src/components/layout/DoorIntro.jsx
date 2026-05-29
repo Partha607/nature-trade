@@ -31,6 +31,7 @@ export default function DoorIntro() {
 
   return (
     <div key={runId} className="door-intro" style={{ '--logo': `url(${logo})` }} aria-hidden="true">
+      <div className="door-intro__halo" />
       <div className="door-intro__panel door-intro__panel--left" />
       <div className="door-intro__panel door-intro__panel--right" />
     </div>

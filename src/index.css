@@ -314,6 +314,23 @@
   100% { opacity: 0; transform: scale(1.5); } /* whole logo looms toward viewer */
 }
 
+/* soft, washed circular wash behind only the logo — adds depth; rest of the
+   screen stays transparent */
+.door-intro__halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(560px, 84vw);
+  height: min(560px, 84vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(247, 242, 234, 0.5) 0%, rgba(247, 242, 234, 0.22) 40%, rgba(247, 242, 234, 0) 70%);
+  animation: doorHaloFade 2s var(--ease-luxe) forwards;
+}
+@keyframes doorHaloFade {
+  0%, 30%  { opacity: 1; }
+  66%, 100% { opacity: 0; }
+}
+
 /* each transparent door carries one half of the big centred colour logo
    (no solid backdrop — the live page shows through) */
 .door-intro__panel {
